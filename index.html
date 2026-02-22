@@ -202,53 +202,28 @@ setInterval(spawnHeart,1000);
 <br>
 <button onclick="calculateLove()">Calculate Our Love ❤️</button>
 
-<h3 id="result"></h3>
+<h3 id="loveResult"></h3>
 
 <script>
 function calculateLove(){
-let n1=document.getElementById("name1").value;
-let n2=document.getElementById("name2").value;
+let n1 = document.getElementById("name1").value;
+let n2 = document.getElementById("name2").value;
 
-if(n1==="" || n2===""){
+if(n1 === "" || n2 === ""){
 alert("Enter both names ❤️");
 return;
 }
 
-// Always high between 95% and 100%
+// Always high
 let loveScore = Math.floor(Math.random() * 6) + 95;
 
-document.getElementById("result").innerHTML=
-n1.toUpperCase()+" ❤️ "+n2.toUpperCase()+" = "+loveScore+"% 💖";
+document.getElementById("loveResult").innerHTML =
+n1.toUpperCase() + " ❤️ " + n2.toUpperCase() + " = " + loveScore + "% 💖";
 
-// Extra romantic reaction
-if(loveScore>=98){
+if(loveScore >= 98){
 alert("Soulmates Forever ❤️🔥");
 }else{
 alert("Made For Each Other 💕");
-}
-}
-let n1=document.getElementById("name1").value.toLowerCase();
-let n2=document.getElementById("name2").value.toLowerCase();
-
-if(n1==="" || n2===""){
-alert("Enter both names ❤️");
-return;
-}
-
-let loveScore=0;
-let combined=n1+n2;
-
-for(let i=0;i<combined.length;i++){
-loveScore+=combined.charCodeAt(i);
-}
-
-loveScore = (loveScore % 51) + 50; // ensures 50%–100%
-
-document.getElementById("result").innerHTML=
-n1.toUpperCase()+" ❤️ "+n2.toUpperCase()+" = "+loveScore+"% 💖";
-
-if(loveScore>90){
-alert("Perfect Match! Destiny ❤️");
 }
 }
 </script>
