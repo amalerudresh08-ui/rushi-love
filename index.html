@@ -12,15 +12,15 @@ font-family:Arial;
 text-align:center;
 background:linear-gradient(135deg,#ff758c,#ff7eb3);
 color:white;
-overflow-x:hidden;
+overflow:hidden;
 }
 
-h1{margin-top:20px;}
+h1{margin-top:15px;}
 
 .slideshow{
 width:250px;
 height:250px;
-margin:20px auto;
+margin:15px auto;
 position:relative;
 border-radius:20px;
 overflow:hidden;
@@ -32,24 +32,17 @@ width:100%;
 height:100%;
 object-fit:cover;
 position:absolute;
-top:0;
-left:0;
 display:none;
 }
 
-.slideshow img.active{
-display:block;
-}
+.slideshow img.active{display:block;}
 
-#typing{
-font-size:18px;
-margin:10px;
-}
+#typing{font-size:18px;margin:10px;}
 
 .meter{
 width:80%;
 background:white;
-margin:15px auto;
+margin:10px auto;
 border-radius:20px;
 overflow:hidden;
 }
@@ -61,18 +54,33 @@ background:#ff4b7d;
 }
 
 button{
-padding:10px 20px;
+padding:8px 18px;
 border:none;
 border-radius:20px;
-margin:8px;
+margin:6px;
 cursor:pointer;
-font-size:15px;
+font-size:14px;
 }
 
 #yesBtn{background:white;color:#ff4b7d;}
 #noBtn{background:#ff4b7d;color:white;position:relative;}
 
-#secret{display:none;margin-top:15px;}
+#secret{display:none;margin-top:10px;}
+
+#gameArea{
+position:relative;
+width:100%;
+height:200px;
+margin-top:15px;
+background:rgba(255,255,255,0.1);
+overflow:hidden;
+}
+
+.heartGame{
+position:absolute;
+font-size:30px;
+cursor:pointer;
+}
 
 </style>
 </head>
@@ -105,9 +113,15 @@ I LOVE YOU SO MUCH SARTHAKI ❤️
 Forever yours — Rushi 💕
 </div>
 
+<h3>Mini Love Catch Game 🎮</h3>
+<p>Catch 5 hearts to unlock surprise!</p>
+
+<div id="gameArea"></div>
+<p id="score">Score: 0</p>
+
 <script>
 
-/* Slideshow FIXED */
+/* Slideshow */
 let slides=document.querySelectorAll(".slideshow img");
 let index=0;
 setInterval(()=>{
@@ -116,7 +130,7 @@ index=(index+1)%slides.length;
 slides[index].classList.add("active");
 },2500);
 
-/* Typing */
+/* Typing Animation */
 let text="I loveeee uhhh Sarthaki ❤️";
 let i=0;
 function type(){
@@ -127,24 +141,21 @@ setTimeout(type,120);
 }
 type();
 
-/* Love Percentage */
+/* Love Meter */
 let percent=0;
 let bar=document.getElementById("progress");
 let interval=setInterval(()=>{
 if(percent<100){
 percent++;
 bar.style.width=percent+"%";
-}else{
-clearInterval(interval);
 }
-},50);
+},40);
 
-/* Yes Button */
+/* Buttons */
 function love(){
 document.getElementById("secret").style.display="block";
 }
 
-/* No Button Run */
 function moveNo(){
 let btn=document.getElementById("noBtn");
 btn.style.position="absolute";
@@ -152,7 +163,94 @@ btn.style.left=Math.random()*80+"%";
 btn.style.top=Math.random()*80+"%";
 }
 
-</script>
+/* MINI GAME */
+let score=0;
+let gameArea=document.getElementById("gameArea");
 
+function spawnHeart(){
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.className="heartGame";
+
+heart.style.left=Math.random()*90+"%";
+heart.style.top=Math.random()*80+"%";
+
+heart.onclick=function(){
+score++;
+document.getElementById("score").innerText="Score: "+score;
+heart.remove();
+
+if(score>=5){
+alert("You caught my heart forever ❤️ — Rushi");
+}
+};
+
+gameArea.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},2000);
+}
+
+setInterval(spawnHeart,1000);
+
+</script>
+<h2>Love Calculator 💘</h2>
+
+<input type="text" id="name1" placeholder="Your Name" style="padding:8px;border-radius:10px;border:none;margin:5px;">
+<input type="text" id="name2" placeholder="Her Name" style="padding:8px;border-radius:10px;border:none;margin:5px;">
+<br>
+<button onclick="calculateLove()">Calculate Our Love ❤️</button>
+
+<h3 id="result"></h3>
+
+<script>
+function calculateLove(){
+let n1=document.getElementById("name1").value;
+let n2=document.getElementById("name2").value;
+
+if(n1==="" || n2===""){
+alert("Enter both names ❤️");
+return;
+}
+
+// Always high between 95% and 100%
+let loveScore = Math.floor(Math.random() * 6) + 95;
+
+document.getElementById("result").innerHTML=
+n1.toUpperCase()+" ❤️ "+n2.toUpperCase()+" = "+loveScore+"% 💖";
+
+// Extra romantic reaction
+if(loveScore>=98){
+alert("Soulmates Forever ❤️🔥");
+}else{
+alert("Made For Each Other 💕");
+}
+}
+let n1=document.getElementById("name1").value.toLowerCase();
+let n2=document.getElementById("name2").value.toLowerCase();
+
+if(n1==="" || n2===""){
+alert("Enter both names ❤️");
+return;
+}
+
+let loveScore=0;
+let combined=n1+n2;
+
+for(let i=0;i<combined.length;i++){
+loveScore+=combined.charCodeAt(i);
+}
+
+loveScore = (loveScore % 51) + 50; // ensures 50%–100%
+
+document.getElementById("result").innerHTML=
+n1.toUpperCase()+" ❤️ "+n2.toUpperCase()+" = "+loveScore+"% 💖";
+
+if(loveScore>90){
+alert("Perfect Match! Destiny ❤️");
+}
+}
+</script>
 </body>
 </html>
