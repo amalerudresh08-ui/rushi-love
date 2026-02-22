@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Sarthaki ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+text-align:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+color:white;
+overflow-x:hidden;
+}
+
+h1{margin-top:20px;}
+
+.slideshow{
+width:250px;
+height:250px;
+margin:20px auto;
+position:relative;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 0 20px white;
+}
+
+.slideshow img{
+width:100%;
+height:100%;
+object-fit:cover;
+position:absolute;
+top:0;
+left:0;
+display:none;
+}
+
+.slideshow img.active{
+display:block;
+}
+
+#typing{
+font-size:18px;
+margin:10px;
+}
+
+.meter{
+width:80%;
+background:white;
+margin:15px auto;
+border-radius:20px;
+overflow:hidden;
+}
+
+.progress{
+height:20px;
+width:0%;
+background:#ff4b7d;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+margin:8px;
+cursor:pointer;
+font-size:15px;
+}
+
+#yesBtn{background:white;color:#ff4b7d;}
+#noBtn{background:#ff4b7d;color:white;position:relative;}
+
+#secret{display:none;margin-top:15px;}
+
+</style>
+</head>
+
+<body>
+
+<h1>My Beautiful Sarthaki ❤️</h1>
+
+<div class="slideshow">
+<img src="./photo1.jpg" class="active">
+<img src="./photo2.jpg">
+<img src="./photo3.jpg">
+<img src="./photo4.jpg">
+<img src="./photo5.jpg">
+</div>
+
+<div id="typing"></div>
+
+<h3>Our Love Percentage 💖</h3>
+<div class="meter">
+<div class="progress" id="progress"></div>
+</div>
+
+<h3>Will you forgive me? 🥺</h3>
+<button id="yesBtn" onclick="love()">Yes ❤️</button>
+<button id="noBtn" onclick="moveNo()">No 😒</button>
+
+<div id="secret">
+I LOVE YOU SO MUCH SARTHAKI ❤️  
+Forever yours — Rushi 💕
+</div>
+
+<script>
+
+/* Slideshow FIXED */
+let slides=document.querySelectorAll(".slideshow img");
+let index=0;
+setInterval(()=>{
+slides[index].classList.remove("active");
+index=(index+1)%slides.length;
+slides[index].classList.add("active");
+},2500);
+
+/* Typing */
+let text="I loveeee uhhh Sarthaki ❤️";
+let i=0;
+function type(){
+document.getElementById("typing").innerHTML=text.substring(0,i);
+i++;
+if(i>text.length){i=0;}
+setTimeout(type,120);
+}
+type();
+
+/* Love Percentage */
+let percent=0;
+let bar=document.getElementById("progress");
+let interval=setInterval(()=>{
+if(percent<100){
+percent++;
+bar.style.width=percent+"%";
+}else{
+clearInterval(interval);
+}
+},50);
+
+/* Yes Button */
+function love(){
+document.getElementById("secret").style.display="block";
+}
+
+/* No Button Run */
+function moveNo(){
+let btn=document.getElementById("noBtn");
+btn.style.position="absolute";
+btn.style.left=Math.random()*80+"%";
+btn.style.top=Math.random()*80+"%";
+}
+
+</script>
+
+</body>
+</html>
